@@ -89,9 +89,16 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     }
                     value_3--;
                     printf("<");
+                    if(k==value_3)
+                        {
+                        system("cls");
+                        value_3=0;
+                        *wsk_2=value_3;
+                        return 0;
+                        }             
                 }
             }
-            else
+            if(random<value_2)
             {
                 if(j==random)
                 {
@@ -104,6 +111,13 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     value_3--;
                 }
                 i=0;
+                if(i==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }             
                 if(j==value_2)
                 {
                     while(i<value_1)
@@ -113,6 +127,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     }
                     printf("*");
                 }
+                i=0;
             }
             printf("\n");
         }
@@ -123,7 +138,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                 printf("\n");
                 j++;
             }
-            if(value_1==value_3 || (value_1+1==value_3))
+            if((value_1==value_3 || (value_1+1==value_3)))
             {
                 while(i<value_3)
                 {
@@ -133,19 +148,19 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                 printf("<&*");
                 value_3--;
                 i=0;
+                while(j<21)
+                    {
+                        printf("\n");
+                        j++;
+                    }
+                printf("-----------------------------END----------------------------");
                 if(k==value_3)
                 {
                     system("cls");
                     value_3=0;
                     *wsk_2=value_3;
                     return 0;
-                }
-                while(j<21)
-                    {
-                        printf("\n");
-                        j++;
-                    }
-                    printf("-----------------------------END----------------------------");
+                }               
                 value_2=-1;
                 value_1=value_3=0;
                 *wsk=value_1;
