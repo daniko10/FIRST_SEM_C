@@ -22,7 +22,6 @@ int main()
             random=rand()%21+1; // it will choose the place of the next enemy between possbile range
             d=60;
             pt3=&d;
-            printf("%d",*pt3);
         }
         if(*pt>60)
         odliczanie(pt2);
@@ -69,43 +68,91 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
     {   
         if(random!=value_2)
         {
-            if(j==random)
+            if(random>value_2)
             {
-                while(k<value_3)
+                if(j==value_2)
                 {
-                    printf(" ");
-                    k++;
+                    while(i<value_1)
+                    {
+                        printf(" ");
+                        i++;
+                    }
+                    printf("*");
                 }
-                printf("<");
-                value_3--;
-                k=0;
-                if(k==value_3)
+                i=0;
+                if(j==random)
                 {
-                    system("cls");
-                    value_3=0;
-                    *wsk_2=value_3;
-                    return 0;
-                }            
+                    while(i<value_3)
+                    {
+                        printf(" ");
+                        i++;
+                    }
+                    value_3--;
+                    printf("<");
+                }
             }
-            if(j==value_2)
+            else
             {
-                while(i<value_1)
+                if(j==random)
                 {
-                    printf(" ");
-                    i++;
+                    while(i<value_3)
+                    {
+                        printf(" ");
+                        i++;
+                    }
+                    printf("<");
+                    value_3--;
                 }
-                printf("*");
-                break;
+                i=0;
+                if(j==value_2)
+                {
+                    while(i<value_1)
+                    {
+                        printf(" ");
+                        i++;
+                    }
+                    printf("*");
+                }
             }
             printf("\n");
         }
-        else // how to make some "objects" "flying" into us
+        else
         {
             while(j<random)
             {
                 printf("\n");
                 j++;
             }
+            if(value_1==value_3 || (value_1+1==value_3))
+            {
+                while(i<value_3)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("<&*");
+                value_3--;
+                i=0;
+                if(k==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }
+                while(j<21)
+                    {
+                        printf("\n");
+                        j++;
+                    }
+                    printf("-----------------------------END----------------------------");
+                value_2=-1;
+                value_1=value_3=0;
+                *wsk=value_1;
+                *wsk_1=value_2;
+                *wsk_2=value_3;
+                return 0;
+            }          
             if(value_3>value_1)
             {
                 while(i<value_1)
@@ -156,37 +203,6 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                 printf("*");
                 break;  
             }
-            else if(value_1==value_3 || (value_1+1==value_3))
-            {
-                while(i<value_3)
-                {
-                    printf(" ");
-                    i++;
-                }
-                printf("<&*");
-                value_3--;
-                k=0;
-                if(k==value_3)
-                {
-                    system("cls");
-                    value_3=0;
-                    *wsk_2=value_3;
-                    return 0;
-                }
-                while(j<21)
-                    {
-                        printf("\n");
-                        j++;
-                    }
-                    printf("-----------------------------END----------------------------");
-                value_2=-1;
-                value_1=value_3=0;
-                *wsk=value_1;
-                *wsk_1=value_2;
-                *wsk_2=value_3;
-                return 0;
-            }           
-            
         }
         j++;
     }
@@ -241,3 +257,4 @@ void doliczanie(int *w)
     int number=10;
     *w=number;
 }
+// how to make some "objects" "flying" into us
