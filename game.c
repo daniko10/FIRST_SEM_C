@@ -1,19 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<time.h>
 
 int main()
 {
-    int bool_1=1, a=0, b=0, c=10, count=0;
-    int last=0;
+    srand(time(NULL));
+    int bool_1=1, a=0, b=0, c=10, count=0,random=rand()%21+1;
+    int last=0, d=60;
     //pointers
-    int  *pt, *pt1,*pt2;
+    int  *pt, *pt1,*pt2,*pt3;
     //giving pointers "values"
     pt=&a;
     pt1=&b;
     pt2=&c;
+    pt3=&d;
     while(bool_1)
     {
+        if(*pt3==0)
+        {
+            random=rand()%21+1; // it will choose the place of the next enemy between possbile range
+            d=60;
+            pt3=&d;
+            printf("%d",*pt3);
+        }
         if(*pt>60)
         odliczanie(pt2);
         else
@@ -23,19 +33,25 @@ int main()
             last=-1;
             system("cls");
             printf("Too many moves out of the map => WASTED!");
-            direction_1(pt,pt1,count,last);
+            direction_1(pt,pt1,pt3,count,last,random);
             return 0;
         }
-        direction_1(pt,pt1,count,last);
+        direction_1(pt,pt1,pt3,count,last,random);
+        if(*pt==*pt3 && *pt1==-1)
+        {
+            printf("\nGOT YOU!\n");
+            return 0;
+        }
         count++;
         system("cls");
     }
 }
-void direction_1(int *wsk,int *wsk_1,int zm,int last)
+void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
 {
-    int value_1,value_2,i=0,j=0;
+    int value_1,value_2,value_3,i=0,j=0,k=0;
     value_1=*wsk;
     value_2=*wsk_1;
+    value_3=*wsk_2;
 
     char choice;
 
@@ -49,20 +65,131 @@ void direction_1(int *wsk,int *wsk_1,int zm,int last)
         i++;
     }
     i=0;
-    while(j<value_2)
-    {
-        j++;
-        printf("\n");
-        if(j==value_2)
+    while(j<21)
+    {   
+        if(random!=value_2)
         {
-            while(i<value_1)
+            if(j==random)
             {
-                printf(" ");
-                i++;
+                while(k<value_3)
+                {
+                    printf(" ");
+                    k++;
+                }
+                printf("<");
+                value_3--;
+                k=0;
+                if(k==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }            
             }
+            if(j==value_2)
+            {
+                while(i<value_1)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("*");
+                break;
+            }
+            printf("\n");
         }
+        else // how to make some "objects" "flying" into us
+        {
+            while(j<random)
+            {
+                printf("\n");
+                j++;
+            }
+            if(value_3>value_1)
+            {
+                while(i<value_1)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("*");
+                while(i<value_3)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("<");
+                value_3--;
+                k=0;
+                if(k==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }  
+                break;
+            }
+            else if(value_1>value_3)
+            {
+                while(i<value_3)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("<");
+                value_3--;
+                k=0;
+                if(k==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }
+                while(i<value_1)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("*");
+                break;  
+            }
+            else if(value_1==value_3 || (value_1+1==value_3))
+            {
+                while(i<value_3)
+                {
+                    printf(" ");
+                    i++;
+                }
+                printf("<&*");
+                value_3--;
+                k=0;
+                if(k==value_3)
+                {
+                    system("cls");
+                    value_3=0;
+                    *wsk_2=value_3;
+                    return 0;
+                }
+                while(j<21)
+                    {
+                        printf("\n");
+                        j++;
+                    }
+                    printf("-----------------------------END----------------------------");
+                value_2=-1;
+                value_1=value_3=0;
+                *wsk=value_1;
+                *wsk_1=value_2;
+                *wsk_2=value_3;
+                return 0;
+            }           
+            
+        }
+        j++;
     }
-    printf("*");
     while(j<21)
     {
         printf("\n");
@@ -97,6 +224,7 @@ void direction_1(int *wsk,int *wsk_1,int zm,int last)
     }
     *wsk=value_1;
     *wsk_1=value_2;
+    *wsk_2=value_3;
 }
 void odliczanie(int *w)
 {
