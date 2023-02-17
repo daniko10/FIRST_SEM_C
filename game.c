@@ -33,12 +33,14 @@ int main()
             system("cls");
             printf("Too many moves out of the map => WASTED!");
             direction_1(pt,pt1,pt3,count,last,random);
+            sleep(2);
             return 0;
         }
         direction_1(pt,pt1,pt3,count,last,random);
         if(*pt==*pt3 && *pt1==-1)
         {
             printf("\nGOT YOU!\n");
+            sleep(2);
             return 0;
         }
         count++;
@@ -65,7 +67,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
     }
     i=0;
     while(j<21)
-    {   
+    {
         if(random!=value_2)
         {
             if(random>value_2)
@@ -95,7 +97,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                         value_3=0;
                         *wsk_2=value_3;
                         return 0;
-                        }             
+                        }
                 }
             }
             if(random<value_2)
@@ -117,7 +119,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     value_3=0;
                     *wsk_2=value_3;
                     return 0;
-                }             
+                }
                 if(j==value_2)
                 {
                     while(i<value_1)
@@ -160,14 +162,14 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     value_3=0;
                     *wsk_2=value_3;
                     return 0;
-                }               
+                }
                 value_2=-1;
                 value_1=value_3=0;
                 *wsk=value_1;
                 *wsk_1=value_2;
                 *wsk_2=value_3;
                 return 0;
-            }          
+            }
             if(value_3>value_1)
             {
                 while(i<value_1)
@@ -190,7 +192,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     value_3=0;
                     *wsk_2=value_3;
                     return 0;
-                }  
+                }
                 break;
             }
             else if(value_1>value_3)
@@ -216,7 +218,7 @@ void direction_1(int *wsk,int *wsk_1,int *wsk_2,int zm,int last, int random)
                     i++;
                 }
                 printf("*");
-                break;  
+                break;
             }
         }
         j++;
