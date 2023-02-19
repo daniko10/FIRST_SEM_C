@@ -6,8 +6,9 @@
 int main()
 {
     srand(time(NULL));
-    int bool_1=1, a=0, b=0, c=10, count=0,random=rand()%21+1;
+    int bool_1=1, a=0, b=0, c=10, count=0,random=rand()%21+1, num=0;
     int last=0, d=60;
+    char number;
     //pointers
     int  *pt, *pt1,*pt2,*pt3;
     //giving pointers "values"
@@ -15,6 +16,40 @@ int main()
     pt1=&b;
     pt2=&c;
     pt3=&d;
+    //intro
+    int intro=1;
+    while(intro<=100)
+    {
+        printf("--------------------\n");
+        int intr_1=0;
+        while(intr_1<intro)
+        {
+            if(intr_1%10==0)
+            printf("[]");
+            intr_1++;
+        }
+        printf("\n--------------------\n");
+        printf("Loading %d%%",intro);
+        sleep(1);
+        if(intro>70 && (number!='c' && number!='C') && num==0)
+        {
+            num++;
+            printf("\nTo cancel press 'C'");
+            number=getch();
+            if(number=='c' || number=='C')
+            {
+                printf("You stopped loading the game. Bye\n");
+                return 0;
+            }
+        }
+        intro++;
+        system("cls");
+        if(intro==100)
+            break;
+    }
+
+
+    //main game
     while(bool_1)
     {
         if(*pt3==0)
