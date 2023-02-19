@@ -1,8 +1,9 @@
 # PROJECT_C
 My first journey with C on Computer Science studies *__*
 
-This project contains 3 different programs. In the first one, called "GITHUB", you will be able to 
-choose one of 14 others programs (just built in one), the second and also the third one is made to put in some arguments. 
+GITHUB.c - contains 14 different programs
+game.c - first, simple game. Ur "*" and u have to stay away of "<"
+two others C programs expect u to put in some arguments while running
 I hope you enjoy it :)
 
 //CODEBLOCKS
