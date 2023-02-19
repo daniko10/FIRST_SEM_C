@@ -6,8 +6,8 @@
 int main()
 {
     srand(time(NULL));
-    int bool_1=1, a=0, b=0, c=10, count=0,random=rand()%21+1, num=0;
-    int last=0, d=60;
+    int bool_1=1, a=0, b=0, c=10, d=60, count=0,random=rand()%21+1, num=0;
+    int last=0;
     char number;
     //pointers
     int  *pt, *pt1,*pt2,*pt3;
