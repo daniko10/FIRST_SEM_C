@@ -32,9 +32,27 @@ int main()
         }
         if(moves_w==10)
         {
-            printf("\nYou lost!\n");
+            defeat++;
+            printf("\nYou lost!\nTo continue press c..\n");
+            if(score>temp)
+            temp=score;
+            char choice;
             sleep(3);
-            return 0;
+            scanf("%c",&choice);
+            if(choice=='c')
+            {
+                moves_w=0;
+                result=0;
+                score=0;
+                level=1;
+                pt_enemy=100;
+                pt_position=0;
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         if((pt_position==pt_enemy || pt_position==pt_enemy-1 || pt_position==pt_enemy-2) && *jumping==0)
         {
@@ -50,17 +68,20 @@ int main()
         {
             defeat++;
             printf("\nYou lost!\nTo continue press c..\n");
+            if(score>temp)
             temp=score;
             char choice;
             sleep(3);
-            choice=getch();
+            scanf("%c",&choice);
             if(choice=='c')
             {
+                moves_w=0;
                 result=0;
                 score=0;
                 level=1;
                 pt_enemy=100;
                 pt_position=0;
+                continue;
             }
             else
                 return 0;
@@ -70,7 +91,7 @@ int main()
                 level++;
                 pt_position=0;
             }
-        if(pt_enemy<=0)
+        if(pt_enemy<0)
         {
             pt_enemy=101;
         }
