@@ -6,7 +6,7 @@
 
 int main()
 {
-    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1;
+    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1,highscore, defeat=0, temp=-1;
     char move;
     position=&pt_position;
     jumping=&pt_jumping;
@@ -14,7 +14,6 @@ int main()
 
     while(true)
     {
-
         if(kbhit())
         {
             move=getch();
@@ -27,6 +26,10 @@ int main()
         printf("----------------\nYour score: %d | \t Level: %d\n----------------\n",score,level);
         movement(position,jumping,enemy_position);
         printf("\n--------------------\nAvailable moves: %d |\n--------------------\n",10-moves_w);
+        if(defeat!=0)
+        {
+            printf("\n--------------------\nYour highscore: %d |\n--------------------\n",temp);
+        }
         if(moves_w==10)
         {
             printf("\nYou lost!\n");
@@ -45,9 +48,22 @@ int main()
         }
         if(result==1)
         {
-            printf("\nYou lost!\n");
+            defeat++;
+            printf("\nYou lost!\nTo continue press c..\n");
+            temp=score;
+            char choice;
             sleep(3);
-            return 0;
+            choice=getch();
+            if(choice=='c')
+            {
+                result=0;
+                score=0;
+                level=1;
+                pt_enemy=100;
+                pt_position=0;
+            }
+            else
+                return 0;
         }
         if(pt_position==100)
             {
