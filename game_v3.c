@@ -6,7 +6,7 @@
 
 int main()
 {
-    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1,highscore, defeat=0, temp=-1;
+    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1,highscore, defeat=0, temp=-1, checking=0;
     char move;
     position=&pt_position;
     jumping=&pt_jumping;
@@ -24,7 +24,7 @@ int main()
                 }
         }
         printf("----------------\nYour score: %d | \t Level: %d\n----------------\n",score,level);
-        movement(position,jumping,enemy_position);
+        movement(position,jumping,enemy_position,level);
         printf("\n--------------------\nAvailable moves: %d |\n--------------------\n",10-moves_w);
         if(defeat!=0)
         {
@@ -38,9 +38,11 @@ int main()
             temp=score;
             char choice;
             sleep(3);
+            fflush(stdin);
             scanf("%c",&choice);
             if(choice=='c')
             {
+                fflush(stdin);
                 moves_w=0;
                 result=0;
                 score=0;
@@ -50,11 +52,9 @@ int main()
                 continue;
             }
             else
-            {
                 break;
-            }
         }
-        if((pt_position==pt_enemy || pt_position==pt_enemy-1 || pt_position==pt_enemy-2) && *jumping==0)
+        if((pt_position==pt_enemy || pt_position==pt_enemy-level || pt_position==pt_enemy-2 || pt_position==pt_enemy-1 || pt_position==pt_enemy-3) && *jumping==0)
         {
             system("cls");
             pt_position++;
@@ -72,9 +72,11 @@ int main()
             temp=score;
             char choice;
             sleep(3);
+            fflush(stdin);
             scanf("%c",&choice);
             if(choice=='c')
             {
+                fflush(stdin);
                 moves_w=0;
                 result=0;
                 score=0;
@@ -84,7 +86,7 @@ int main()
                 continue;
             }
             else
-                return 0;
+                break;
         }
         if(pt_position==100)
             {
@@ -93,7 +95,7 @@ int main()
             }
         if(pt_enemy<0)
         {
-            pt_enemy=101;
+            pt_enemy=100;
         }
         *jumping=0;
         pt_position++;
@@ -111,8 +113,9 @@ int main()
         if(!kbhit())
             moves_w=0;
     }
+    return 0;
 }
-void movement(int *position, int *jumping, int *enemy_position)
+void movement(int *position, int *jumping, int *enemy_position, int level)
 {
     int i=0, j=0, enemy=0, l=0, key=0;
     while(i<5)
@@ -134,7 +137,7 @@ void movement(int *position, int *jumping, int *enemy_position)
             printf("<-");
             l++;
         }
-        if((*position==*enemy_position || *position==*enemy_position-2) && *jumping==0)
+        if((*position==*enemy_position || *position==*enemy_position-2 || *position==*enemy_position-level || *position==*enemy_position-1 || *position==*enemy_position-3) && *jumping==0)
         {
             while(j<*enemy_position)
                 {
