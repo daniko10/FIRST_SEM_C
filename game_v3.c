@@ -1,4 +1,4 @@
-// I can jump // RUNNING TOWARDS THE ENEMY // DANIKO STUDIO 
+// I can jump // RUNNING TOWARDS THE ENEMY // DANIKO STUDIO
 #include<stdio.h>
 #include<conio.h>
 
@@ -42,6 +42,7 @@ int main()
             scanf("%c",&choice);
             if(choice=='c')
             {
+                highscore=temp;
                 fflush(stdin);
                 moves_w=0;
                 result=0;
@@ -76,6 +77,7 @@ int main()
             scanf("%c",&choice);
             if(choice=='c')
             {
+                highscore=temp;
                 fflush(stdin);
                 moves_w=0;
                 result=0;
@@ -112,7 +114,10 @@ int main()
         score++;
         if(!kbhit())
             moves_w=0;
+
     }
+    highscore=temp;
+    koniec(highscore);
     return 0;
 }
 void movement(int *position, int *jumping, int *enemy_position, int level)
@@ -256,5 +261,53 @@ void explosion(int *position,int value, int score,int moves_w)
             }
     }
     value++;
+    }
+}
+void koniec(int highscore)
+{
+    system("cls");
+    int i=0,j=0,k=100,w=1, stop=0;
+    char napis[]="THANKS FOR PLAYING. RECOMMEND DANIKO";
+    while(true)
+    {
+    if(stop==0)
+    {
+    while(i<5)
+    {
+        printf("\n");
+        if(i==2)
+        {
+            while(j<k)
+            {
+                printf(" ");
+                j++;
+            }
+            j=0;
+            while(j<w)
+            {
+                printf("%c",napis[j]);
+                j++;
+            }
+            j=0;
+            k--;
+            if(w<=strlen(napis))
+                w++;
+            if(k==0)
+                stop++;
+        }
+        i++;
+    }
+    i=0;
+    while(i<102)
+    {
+        printf("-");
+        i++;
+    }
+    i=0;
+    printf("\n--------------------\nYour highscore: %d |\n--------------------\n",highscore);
+    system("cls");
+    }
+    else
+        break;
     }
 }
