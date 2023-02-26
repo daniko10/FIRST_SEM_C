@@ -1,4 +1,4 @@
-// moge skakac w grze
+// I can jump // RUNNING TOWARDS THE ENEMY // DANIKO STUDIO 
 #include<stdio.h>
 #include<conio.h>
 
