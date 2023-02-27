@@ -1,4 +1,4 @@
-// I can jump // RUNNING TOWARDS THE ENEMY // DANIKO STUDIO
+// moge skakac w grze
 #include<stdio.h>
 #include<conio.h>
 
@@ -6,7 +6,7 @@
 
 int main()
 {
-    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1,highscore, defeat=0, temp=-1, checking=0;
+    int *position, pt_position=0, *jumping, pt_jumping=0, *enemy_position, pt_enemy=100, result,score=0, value=0, last=-1, moves_w=0, level=1,highscore, defeat=0, temp=-1, checking=0,history1[100]={0};
     char move;
     position=&pt_position;
     jumping=&pt_jumping;
@@ -32,6 +32,7 @@ int main()
         }
         if(moves_w==10)
         {
+            history1[defeat]=score;
             defeat++;
             printf("\nYou lost!\nTo continue press c..\n");
             if(score>temp)
@@ -42,7 +43,6 @@ int main()
             scanf("%c",&choice);
             if(choice=='c')
             {
-                highscore=temp;
                 fflush(stdin);
                 moves_w=0;
                 result=0;
@@ -67,6 +67,7 @@ int main()
         }
         if(result==1)
         {
+            history1[defeat]=score;
             defeat++;
             printf("\nYou lost!\nTo continue press c..\n");
             if(score>temp)
@@ -77,7 +78,6 @@ int main()
             scanf("%c",&choice);
             if(choice=='c')
             {
-                highscore=temp;
                 fflush(stdin);
                 moves_w=0;
                 result=0;
@@ -109,6 +109,7 @@ int main()
         }
         *position=pt_position;
         *enemy_position=pt_enemy;
+        history(history1);
         usleep(60000);
         system("cls");
         score++;
@@ -116,8 +117,6 @@ int main()
             moves_w=0;
 
     }
-    highscore=temp;
-    koniec(highscore);
     return 0;
 }
 void movement(int *position, int *jumping, int *enemy_position, int level)
@@ -263,64 +262,32 @@ void explosion(int *position,int value, int score,int moves_w)
     value++;
     }
 }
-void koniec(int highscore)
+void history(int history1[],int defeat)
 {
-    system("cls");
-    int i=0,j=0,k=100,w=1, stop=0, last=0, tem;
-    char napis[]="THANKS FOR PLAYING. RECOMMEND DANIKO";
-    while(true)
+
+    int i, j=1, temporary;
+    if(defeat>0)
     {
-    if(stop==0)
-    {
-    while(i<5)
-    {
-        tem=last;
-        printf("\n");
-        if(i==2)
+        printf("\n--------------\nYour History: ");
+        while(j<=defeat)
         {
-            if(k!=0)
+            temporary=history1[j];
+            i=j-1;
+            while(i>=0 && history1[i]>temporary)
             {
-            while(j<k)
-            {
-                printf(" ");
-                j++;
+                history1[i+1]=history1[i];
+                i=i-1;
             }
-            j=0;
-            while(j<w)
-            {
-                printf("%c",napis[j]);
-                j++;
-            }
-            j=0;
-            k--;
-            if(w<=strlen(napis))
-                w++;
-            }
-            else
-            {
-                while(tem<strlen(napis))
-                {
-                    printf("%c",napis[tem]);
-                    tem++;
-                }
-                last++;
-                if(last==strlen(napis))
-                    stop++;
-            }
+            history1[i+1]=temporary;
+            j++;
         }
-        i++;
-    }
-    i=0;
-    while(i<102)
-    {
-        printf("-");
-        i++;
-    }
-    i=0;
-    printf("\n--------------------\nYour highscore: %d |\n--------------------\n",highscore);
-    system("cls");
-    }
-    else
-        break;
+        j=0;
+        while(j<100)
+        {
+            if(history1[j]!=0)
+            printf("%d ",history1[j]);
+            j++;
+        }
+        printf("\n--------------\n");
     }
 }
