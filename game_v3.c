@@ -266,7 +266,7 @@ void explosion(int *position,int value, int score,int moves_w)
 void koniec(int highscore)
 {
     system("cls");
-    int i=0,j=0,k=100,w=1, stop=0;
+    int i=0,j=0,k=100,w=1, stop=0, last=0, tem;
     char napis[]="THANKS FOR PLAYING. RECOMMEND DANIKO";
     while(true)
     {
@@ -274,9 +274,12 @@ void koniec(int highscore)
     {
     while(i<5)
     {
+        tem=last;
         printf("\n");
         if(i==2)
         {
+            if(k!=0)
+            {
             while(j<k)
             {
                 printf(" ");
@@ -292,8 +295,18 @@ void koniec(int highscore)
             k--;
             if(w<=strlen(napis))
                 w++;
-            if(k==0)
-                stop++;
+            }
+            else
+            {
+                while(tem<strlen(napis))
+                {
+                    printf("%c",napis[tem]);
+                    tem++;
+                }
+                last++;
+                if(last==strlen(napis))
+                    stop++;
+            }
         }
         i++;
     }
